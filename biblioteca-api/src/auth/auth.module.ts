@@ -5,17 +5,20 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './jwt.strategy';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 @Module({
   imports: [
     UsuarioModule,
     JwtModule.register({
-      secret: 'SECRET_KEY', // Debe ser una clave segura
-      signOptions: { expiresIn: '1h' }, // Duración del token
+      secret: process.env.JWT_SECRET, // Usa la variable de entorno
+      signOptions: { expiresIn: '1h' },
     }),
   ],
   providers: [AuthService, JwtStrategy, JwtAuthGuard],
   controllers: [AuthController],
-  exports: [JwtAuthGuard], // Exporta el guard para usarlo en otros módulos
+  exports: [JwtAuthGuard],
 })
 export class AuthModule {}

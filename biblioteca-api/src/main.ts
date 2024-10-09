@@ -6,11 +6,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Habilitar CORS si es necesario
-  // app.enableCors({
-  //   origin: '*', // Puedes restringir esto a tu dominio específico
+   app.enableCors({
+     origin: '*', // Puedes restringir esto a tu dominio específico
   //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   //   allowedHeaders: ['Content-Type', 'Authorization'],
-  // });
+   });
 
   // Configuración de Swagger
   const config = new DocumentBuilder()

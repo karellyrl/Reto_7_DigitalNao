@@ -73,8 +73,22 @@ export class ReservaService {
     // Guarda la reserva actualizada
     return this.reservaRepository.save(reserva);
   }
-
   async remove(id: number): Promise<void> {
+    // Buscar la reserva antes de eliminarla
+    const reserva = await this.reservaRepository.findOne({ where: { id }, relations: ['libro'] });
+  
+    if (!reserva) {
+      throw new NotFoundException('Reserva no encontrada');
+    }
+  
+    // Marcar el libro como disponible nuevamente
+    const libro = reserva.libro;
+    if (libro) {
+      libro.disponible = true;
+      await this.libroRepository.save(libro); // Guardar el cambio en la disponibilidad del libro
+    }
+  
+    // Eliminar la reserva
     const result = await this.reservaRepository.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException('Reserva no encontrada');

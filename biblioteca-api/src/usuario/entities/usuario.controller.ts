@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards, Res, HttpEx
 import { UsuarioService } from './usuario.service';
 import { Usuario } from './usuario.entity';
 import { CreateUsuarioDto, UpdateUsuarioDto } from './usuario.dto';
-import { JwtAuthGuard } from '../../auth/jwt-auth.guard'; // Importa el guard de JWT
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard'; 
 import { Response } from 'express';
 import { ApiTags, ApiResponse, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 
@@ -11,6 +11,7 @@ import { ApiTags, ApiResponse, ApiOperation, ApiBearerAuth } from '@nestjs/swagg
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
+  // Obtener todos los usuarios
   @Get()
   @UseGuards(JwtAuthGuard) // Protege esta ruta
   @ApiBearerAuth() // Indica que esta ruta requiere autenticación JWT
@@ -21,8 +22,9 @@ export class UsuarioController {
     return res.status(200).json({ message: 'Usuarios obtenidos con éxito.', data: usuarios });
   }
 
+  // Crear un nuevo usuario
   @Post()
-  // No protegemos esta ruta para permitir que los usuarios se registren sin estar autenticados
+  // No se protege esta ruta para permitir que los usuarios se registren sin estar autenticados
   @ApiOperation({ summary: 'Crear un nuevo usuario' })
   @ApiResponse({ status: 201, description: 'Usuario creado con éxito.', type: Usuario })
   @ApiResponse({ status: 400, description: 'Error al crear el usuario.' })
@@ -35,6 +37,7 @@ export class UsuarioController {
     }
   }
 
+  // Obtener un usuario por ID
   @Get(':id')
   @UseGuards(JwtAuthGuard) // Protege esta ruta
   @ApiBearerAuth() // Indica que esta ruta requiere autenticación JWT
@@ -49,6 +52,7 @@ export class UsuarioController {
     return res.status(200).json({ message: 'Usuario encontrado con éxito.', data: usuario });
   }
 
+  // Actualizar un usuario por ID
   @Put(':id')
   @UseGuards(JwtAuthGuard) // Protege esta ruta
   @ApiBearerAuth() // Indica que esta ruta requiere autenticación JWT
@@ -63,6 +67,7 @@ export class UsuarioController {
     return res.status(200).json({ message: 'Usuario actualizado con éxito.', data: updatedUser });
   }
 
+  // Eliminar un usuario por ID
   @Delete(':id')
   @UseGuards(JwtAuthGuard) // Protege esta ruta
   @ApiBearerAuth() // Indica que esta ruta requiere autenticación JWT

@@ -120,7 +120,7 @@ Este proyecto es una API RESTful para la gestión de libros, usuarios, reseñas 
 
 - **API en Render**: [https://reto-7-digitalnao.onrender.com/api-json](https://reto-7-digitalnao.onrender.com/api-json)
 - **Documentación Swagger en Render**: [https://reto-7-digitalnao.onrender.com/api](https://reto-7-digitalnao.onrender.com/api)
-- **API en Swagger Hub**: [https://app.swaggerhub.com/apis-docs/tuusuario/biblioteca-api/1.0](https://app.swaggerhub.com/apis-docs/KARELLY123RIVERAH/Biblioteca-api/1.0#/)
+- **API en Swagger Hub**: [https://app.swaggerhub.com/apis-docs/KARELLY123RIVERAH/Biblioteca-api/1.0#/](https://app.swaggerhub.com/apis-docs/KARELLY123RIVERAH/Biblioteca-api/1.0#/)
 
 ## Instalación del Proyecto
 
